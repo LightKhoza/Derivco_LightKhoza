@@ -1,0 +1,86 @@
+<div class="auth-page">
+
+  <div class="bg-mesh"></div>
+  <div class="bg-glow one"></div>
+  <div class="bg-glow two"></div>
+  <div class="bg-glow three"></div>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+
+        <div class="auth-card">
+
+          <h2 class="text-center">Login</h2>
+
+          <p class="auth-subtitle text-center">
+            Welcome back — access your dashboard
+          </p>
+
+          <!-- EMAIL -->
+          <input class="form-control mb-1"
+            [(ngModel)]="email"
+            #emailRef="ngModel"
+            name="email"
+            required
+            email
+            placeholder="Email" />
+
+          <div class="error" *ngIf="emailRef.invalid && emailRef.touched">
+            <small *ngIf="emailRef.errors?.['required']">
+              Email is required
+            </small>
+            <small *ngIf="emailRef.errors?.['email']">
+              Enter a valid email
+            </small>
+          </div>
+
+          <!-- PASSWORD -->
+          <input class="form-control mb-1"
+            type="password"
+            [(ngModel)]="password"
+            #passwordRef="ngModel"
+            name="password"
+            required
+            minlength="6"
+            placeholder="Password" />
+
+          <div class="error" *ngIf="passwordRef.invalid && passwordRef.touched">
+            <small *ngIf="passwordRef.errors?.['required']">
+              Password is required
+            </small>
+            <small *ngIf="passwordRef.errors?.['minlength']">
+              Minimum 6 characters
+            </small>
+          </div>
+
+          <button class="btn btn-primary w-100 mt-3"
+                  [disabled]="emailRef.invalid || passwordRef.invalid || loading"
+                  (click)="login()">
+
+            <span *ngIf="!loading">Login</span>
+            <span *ngIf="loading">Logging in...</span>
+
+          </button>
+
+          <p class="error text-center mt-2" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </p>
+
+          <p class="text-center mt-3">
+            No account?
+            <a routerLink="/register">Register</a>
+          </p>
+
+          <p class="text-center mt-2">
+            Forgot password?
+            <a routerLink="/forgot-password">Reset here</a>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

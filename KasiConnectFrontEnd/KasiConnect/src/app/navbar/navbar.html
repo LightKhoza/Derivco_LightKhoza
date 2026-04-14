@@ -1,0 +1,66 @@
+<nav class="navbar">
+
+  <a class="logo" routerLink="/">KasiConnect</a>
+
+  <button class="hamburger" (click)="toggleMenu()">
+    ☰
+  </button>
+
+  <div class="nav-desktop">
+
+    <a *ngIf="isCustomer()" routerLink="/providers">Providers</a>
+    <a *ngIf="isCustomer()" routerLink="/bookings">Bookings</a>
+    <a *ngIf="isCustomer()" routerLink="/history">History</a>
+
+    <a *ngIf="isProvider()" routerLink="/provider-bookings">Jobs</a>
+    <a *ngIf="isProvider()" routerLink="/history">History</a>
+
+  </div>
+
+  <div class="nav-user">
+
+    <ng-container *ngIf="auth.isLoggedIn(); else guest">
+
+      <div class="user-info" (click)="goToProfile()">
+        <img [src]="user?.profileImageUrl || 'default-avatar.png'" class="avatar" />
+        <span>{{ user?.name }}</span>
+      </div>
+
+      <button class="btn-logout" (click)="logout()">Logout</button>
+
+    </ng-container>
+
+    <ng-template #guest>
+      <a routerLink="/login" class="btn-login">Login</a>
+      <a routerLink="/register" class="btn-register">Register</a>
+    </ng-template>
+
+  </div>
+
+</nav>
+
+<div class="overlay" *ngIf="menuOpen" (click)="toggleMenu()"></div>
+
+<div class="side-menu" [class.open]="menuOpen">
+
+  <a routerLink="/" (click)="toggleMenu()">Home</a>
+
+  <a *ngIf="isCustomer()" routerLink="/providers" (click)="toggleMenu()">Providers</a>
+  <a *ngIf="isCustomer()" routerLink="/bookings" (click)="toggleMenu()">Bookings</a>
+  <a *ngIf="isCustomer()" routerLink="/history" (click)="toggleMenu()">History</a>
+
+  <a *ngIf="isProvider()" routerLink="/provider-bookings" (click)="toggleMenu()">Jobs</a>
+
+  <hr />
+
+  <ng-container *ngIf="auth.isLoggedIn(); else mobileGuest">
+    <a (click)="goToProfile(); toggleMenu()">Profile</a>
+    <a (click)="logout(); toggleMenu()">Logout</a>
+  </ng-container>
+
+  <ng-template #mobileGuest>
+    <a routerLink="/login" (click)="toggleMenu()">Login</a>
+    <a routerLink="/register" (click)="toggleMenu()">Register</a>
+  </ng-template>
+
+</div>

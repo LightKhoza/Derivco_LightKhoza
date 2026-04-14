@@ -1,0 +1,62 @@
+<div class="auth-page">
+
+  <div class="bg-mesh"></div>
+  <div class="bg-glow one"></div>
+  <div class="bg-glow two"></div>
+  <div class="bg-glow three"></div>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+
+        <div class="auth-card">
+
+          <h3 class="text-center mb-3">Create Account</h3>
+          <div *ngIf="errorMessage" class="alert error">
+            {{ errorMessage }}
+          </div>
+
+          <div *ngIf="successMessage" class="alert success">
+            {{ successMessage }}
+          </div>
+
+          <input class="form-control mb-2"
+            placeholder="Full Name"
+            [(ngModel)]="name" />
+
+          <input class="form-control mb-2"
+            placeholder="Email"
+            [(ngModel)]="email" />
+
+          <input class="form-control mb-2"
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="password" />
+
+          <select class="form-control mb-3" [(ngModel)]="role">
+            <option value="Customer">Customer</option>
+            <option value="Provider">Provider</option>
+          </select>
+
+          <button
+            class="btn btn-success w-100"
+            (click)="register()"
+            [disabled]="loading">
+
+            <span *ngIf="!loading">Register</span>
+            <span *ngIf="loading">Creating account...</span>
+
+          </button>
+
+          <p class="text-center mt-3">
+            Already have an account?
+            <a routerLink="/login">Login</a>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

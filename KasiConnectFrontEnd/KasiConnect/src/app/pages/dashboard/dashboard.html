@@ -1,0 +1,20 @@
+<!-- CUSTOMER -->
+<div *ngIf="role === 'Customer'">
+  <h4>My Bookings</h4>
+  <button routerLink="/bookings">View Bookings</button>
+
+  <button class="btn btn-secondary" routerLink="/history">
+  Booking History
+</button>
+</div>
+
+<!-- PROVIDER -->
+<div *ngIf="role === 'Provider'">
+  <h4>Provider Dashboard</h4>
+  <button routerLink="/provider-bookings">
+    Manage Incoming Bookings
+  </button>
+  <button class="btn btn-secondary" routerLink="/history">
+  Job History
+</button>
+</div>

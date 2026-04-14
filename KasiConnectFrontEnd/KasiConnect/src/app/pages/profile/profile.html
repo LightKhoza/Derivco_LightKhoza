@@ -1,0 +1,52 @@
+<div class="profile-page" *ngIf="user">
+
+  <div class="profile-card">
+
+    <h2>My Profile</h2>
+
+    <div class="avatar-wrapper">
+      <img
+        [src]="user.profileImageUrl || 'assets/default.png'"
+        class="profile-avatar"
+      />
+    </div>
+
+    <input type="file" (change)="onFileSelected($event)" />
+    <button class="btn btn-primary" (click)="upload()">Upload</button>
+
+    <input [(ngModel)]="user.name" class="form-control" />
+    <button class="btn btn-success" (click)="updateName()">Save</button>
+
+    <p>{{ user.email }}</p>
+    <p>{{ user.role }}</p>
+
+  </div>
+
+  <div *ngIf="user.role === 'Provider'" class="profile-summary">
+
+    <h2>Provider Profile</h2>
+
+    <input [(ngModel)]="providerProfile.description" placeholder="Description" class="form-control"/>
+    <input [(ngModel)]="providerProfile.location" placeholder="Location" class="form-control"/>
+    <input [(ngModel)]="providerProfile.hourlyRate" placeholder="Hourly Rate" class="form-control"/>
+
+    <h4>Services</h4>
+
+    <div class="services-box">
+      <div *ngFor="let s of services" class="service-item">
+        <label>
+          <input type="checkbox"
+                 [checked]="selectedServices.includes(s.id)"
+                 (change)="toggleService(s.id)" />
+          {{ s.name }}
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-success mt-3" (click)="saveProviderProfile()">
+      Save Provider Profile
+    </button>
+
+  </div>
+
+</div>

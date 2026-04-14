@@ -1,0 +1,90 @@
+<div class="page-header">
+
+  <h2>Booking History</h2>
+
+  <p class="page-subtitle">
+    View all completed and rejected bookings.
+    This helps you track your service activity over time.
+  </p>
+
+  <!-- STATS -->
+  <div class="quick-stats">
+
+    <div class="stat">
+      <h3>{{ history.length }}</h3>
+      <p>Total</p>
+    </div>
+
+    <div class="stat">
+      <h3>{{ history.filter(h => h.status === 'Completed').length }}</h3>
+      <p>Completed</p>
+    </div>
+
+    <div class="stat">
+      <h3>{{ history.filter(h => h.status === 'Rejected').length }}</h3>
+      <p>Rejected</p>
+    </div>
+
+  </div>
+
+</div>
+<div class="container mt-4">
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div *ngIf="!loading && history.length === 0">
+    No past bookings found.
+  </div>
+
+  <div *ngFor="let b of history" class="card p-3 mb-3 shadow-sm">
+
+    <div class="d-flex justify-content-between">
+      <h5>Booking #{{ b.id }}</h5>
+
+      <span 
+        class="badge"
+        [ngClass]="{
+          'bg-success': b.status === 'Completed',
+          'bg-danger': b.status === 'Rejected'
+        }">
+        {{ b.status }}
+      </span>
+    </div>
+
+    <hr />
+
+    <p><strong>Date:</strong> {{ b.dateTime }}</p>
+    <p><strong>Address:</strong> {{ b.address }}</p>
+
+  </div>
+
+</div>
+<footer class="providers-footer">
+
+  <div class="container footer-inner">
+
+    <div>
+      <h4>KasiConnect</h4>
+      <p>Connecting you with trusted local professionals in minutes.</p>
+    </div>
+
+    <div>
+      <h5>Quick Links</h5>
+      <a routerLink="/">Home</a>
+      <a routerLink="/providers">Providers</a>
+      <a routerLink="/bookings">Bookings</a>
+    </div>
+
+    <div>
+      <h5>Support</h5>
+      <p>support@kasiconnect.com</p>
+      <p>+27 00 000 0000</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 KasiConnect. All rights reserved.
+  </div>
+
+</footer>

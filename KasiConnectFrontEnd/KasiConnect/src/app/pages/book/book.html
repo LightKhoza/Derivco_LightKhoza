@@ -1,0 +1,77 @@
+<div class="auth-page booking-page">
+
+  <div class="bg-mesh"></div>
+  <div class="bg-glow one"></div>
+  <div class="bg-glow two"></div>
+  <div class="bg-glow three"></div>
+
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="auth-card booking-card">
+
+          <h2 class="text-center">Book Service</h2>
+
+          <p class="booking-subtitle">
+            Complete your booking in under a minute. A verified provider will be assigned to your request.
+          </p>
+
+          <div class="booking-steps">
+
+            <div class="step">
+              <span>1</span>
+              <p>Select service details</p>
+            </div>
+
+            <div class="step">
+              <span>2</span>
+              <p>Choose time & location</p>
+            </div>
+
+            <div class="step">
+              <span>3</span>
+              <p>Confirm & get matched</p>
+            </div>
+
+          </div>
+
+          <div class="provider-summary">
+
+            <h4>Provider: {{ provider?.user?.name }}</h4>
+            <p>{{ provider?.description }}</p>
+
+          </div>
+
+          <div class="form-section">
+
+            <input class="form-control mb-2"
+                   placeholder="Service ID (1 = Plumbing etc)"
+                   [(ngModel)]="serviceId">
+
+            <input class="form-control mb-2"
+                   type="datetime-local"
+                   [(ngModel)]="dateTime">
+
+            <input class="form-control mb-3"
+                   placeholder="Address"
+                   [(ngModel)]="address">
+
+            <button class="btn btn-success w-100"
+                    (click)="book()">
+              Confirm Booking
+            </button>
+
+          </div>
+
+          <p class="booking-footer-text">
+            ✔ All providers are verified • ✔ Secure bookings • ✔ Instant confirmation
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

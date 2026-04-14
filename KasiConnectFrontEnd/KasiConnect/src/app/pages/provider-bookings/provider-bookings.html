@@ -1,0 +1,124 @@
+<div class="auth-page dashboard-page">
+
+  <div class="bg-mesh"></div>
+  <div class="bg-glow one"></div>
+  <div class="bg-glow two"></div>
+  <div class="bg-glow three"></div>
+
+  <div class="container mt-4">
+
+    <div class="page-header">
+
+      <h2>Provider Dashboard</h2>
+
+      <p class="page-subtitle">
+        Manage incoming bookings, accept jobs, and track completed services in real time.
+      </p>
+
+      <div class="quick-stats">
+
+        <div class="stat">
+          <h3>{{ bookings.length }}</h3>
+          <p>Total Jobs</p>
+        </div>
+
+        <div class="stat">
+          <h3>{{ bookings.filter(b => b.status === 'Pending').length }}</h3>
+          <p>Pending</p>
+        </div>
+
+        <div class="stat">
+          <h3>{{ bookings.filter(b => b.status === 'Completed').length }}</h3>
+          <p>Completed</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <p *ngIf="loading">Loading...</p>
+
+    <div *ngIf="!loading && bookings.length === 0">
+      No bookings found.
+    </div>
+
+    <div *ngFor="let b of bookings" class="provider-card">
+
+      <div class="card-top">
+
+        <h5>Booking #{{ b.id }}</h5>
+
+        <span class="status" [ngClass]="b.status.toLowerCase()">
+          {{ b.status }}
+        </span>
+
+      </div>
+
+      <hr />
+
+      <p><strong>Service:</strong> {{ b.serviceName }}</p>
+
+      <p><strong>Customer:</strong> {{ b.customerName }}</p>
+
+      <p><strong>Date:</strong> {{ b.dateTime | date:'medium' }}</p>
+
+      <p><strong>Address:</strong> {{ b.address }}</p>
+
+      <div class="actions" *ngIf="b.status === 'Pending'">
+
+        <button class="btn-accept"
+                (click)="updateStatus(b.id, 'Accepted')">
+          Accept
+        </button>
+
+        <button class="btn-reject"
+                (click)="updateStatus(b.id, 'Rejected')">
+          Reject
+        </button>
+
+      </div>
+
+      <div class="actions" *ngIf="b.status === 'Accepted'">
+
+        <button class="btn-complete"
+                (click)="updateStatus(b.id, 'Completed')">
+          Mark Completed
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="app-footer">
+
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <h4>KasiConnect</h4>
+      <p>Provider Dashboard — manage your jobs, grow your business, and get paid faster.</p>
+    </div>
+
+    <div class="footer-links">
+      <h5>Quick Links</h5>
+      <a routerLink="/">Home</a>
+      <a routerLink="/provider-bookings">Bookings</a>
+      <a routerLink="/history">History</a>
+    </div>
+
+    <div class="footer-support">
+      <h5>Support</h5>
+      <p>support@kasiconnect.com</p>
+      <p>+27 00 000 0000</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 KasiConnect • Built for trusted local services
+  </div>
+
+</footer>

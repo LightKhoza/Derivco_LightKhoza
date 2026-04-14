@@ -1,0 +1,120 @@
+<div class="providers-page">
+
+  <div class="container">
+
+    <div class="page-header">
+
+      <h2 class="page-title">Service Providers</h2>
+
+      <p class="page-subtitle">
+        Browse trusted local professionals ready to help you with your next job.
+        All providers are verified and rated by real users.
+      </p>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search providers (name, location, service...)"
+          [(ngModel)]="searchTerm"
+          class="search-input"
+        />
+      </div>
+
+      <div class="quick-stats">
+
+        <div class="stat">
+          <h3>300+</h3>
+          <p>Verified Providers</p>
+        </div>
+
+        <div class="stat">
+          <h3>1,000+</h3>
+          <p>Completed Jobs</p>
+        </div>
+
+        <div class="stat">
+          <h3>4.8★</h3>
+          <p>Average Rating</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="providers-grid">
+
+      <div class="provider-card" *ngFor="let p of filteredProviders()">
+
+        <div class="text-center mb-3">
+          <img
+            [src]="p.profileImageUrl || 'default-avatar.png'"
+            class="provider-avatar"
+            (error)="p.profileImageUrl = 'default-avatar.png'"
+          />
+        </div>
+
+        <h5>{{ p.name || 'No name available' }}</h5>
+
+        <p class="email">{{ p.email || 'No email provided' }}</p>
+
+        <hr />
+
+        <p>
+          <strong>Description:</strong><br />
+          {{ p.description || 'No description available' }}
+        </p>
+
+        <p>
+          <strong>Location:</strong><br />
+          {{ p.location || 'Location not set' }}
+        </p>
+
+        <p>
+          <strong>Hourly Rate:</strong>
+          R {{ p.hourlyRate || 0 }}
+        </p>
+
+        <button class="btn-book" (click)="selectProvider(p)">
+          Book Now
+        </button>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="filteredProviders().length === 0" class="empty">
+      No matching providers found.
+    </div>
+
+  </div>
+</div>
+
+<footer class="providers-footer">
+
+  <div class="container footer-inner">
+
+    <div>
+      <h4>KasiConnect</h4>
+      <p>Connecting you with trusted local professionals in minutes.</p>
+    </div>
+
+    <div>
+      <h5>Quick Links</h5>
+      <a routerLink="/">Home</a>
+      <a routerLink="/providers">Providers</a>
+      <a routerLink="/bookings">Bookings</a>
+    </div>
+
+    <div>
+      <h5>Support</h5>
+      <p>support@kasiconnect.com</p>
+      <p>+27 00 000 0000</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 KasiConnect. All rights reserved.
+  </div>
+
+</footer>

@@ -1,0 +1,6 @@
+@KasiConnectBackEnd_HostAddress = http://localhost:5128
+
+GET {{KasiConnectBackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

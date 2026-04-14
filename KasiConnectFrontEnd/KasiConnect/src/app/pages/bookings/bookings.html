@@ -1,0 +1,74 @@
+<div class="container mt-4">
+
+  <!-- HEADER -->
+  <div class="page-header">
+
+    <h2>My Bookings</h2>
+
+    <p class="page-subtitle">
+      Track all your service bookings in one place.
+    </p>
+
+    <div class="quick-stats">
+
+      <div class="stat">
+        <h3>{{ bookings.length }}</h3>
+        <p>Total</p>
+      </div>
+
+      <div class="stat">
+        <h3>{{ countStatus('Pending') }}</h3>
+        <p>Pending</p>
+      </div>
+
+      <div class="stat">
+        <h3>{{ countStatus('Completed') }}</h3>
+        <p>Completed</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LOADING -->
+  <p *ngIf="loading">Loading...</p>
+
+  <!-- EMPTY -->
+  <div *ngIf="!loading && bookings.length === 0">
+    No bookings found.
+  </div>
+
+  <!-- BOOKINGS -->
+  <div *ngFor="let b of bookings"
+       class="card booking-card"
+       [ngClass]="{
+         'pending': b.status?.toLowerCase() === 'pending',
+         'completed': b.status?.toLowerCase() === 'completed',
+         'cancelled': b.status?.toLowerCase() === 'cancelled'
+       }">
+
+    <div class="booking-header">
+
+      <h5>Booking #{{ b.id }}</h5>
+
+      <span class="badge status-badge">
+        {{ b.status }}
+      </span>
+
+    </div>
+
+    <hr />
+
+    <div class="booking-body">
+
+      <p><strong>Service:</strong> {{ b.serviceName }}</p>
+      <p><strong>Provider:</strong> {{ b.providerName }}</p>
+
+      <p><strong>Date:</strong> {{ b.dateTime | date:'medium' }}</p>
+      <p><strong>Address:</strong> {{ b.address }}</p>
+
+    </div>
+
+  </div>
+
+</div>
